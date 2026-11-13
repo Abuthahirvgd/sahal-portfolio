@@ -13,7 +13,11 @@ const Section = ({ id, children, className = '' }) => (
   </section>
 )
 const SectionNavigation = () => {
-  const [navigation, setNavigation] = useState({ href: '#about', up: false })
+  const [navigation, setNavigation] = useState({
+    href: '#about',
+    up: false,
+    previousHref: null,
+  })
 
   useEffect(() => {
     const updateNavigation = () => {
@@ -26,8 +30,11 @@ const SectionNavigation = () => {
       const nextNavigation = {
         href: isLastSection ? '#top' : `#${sectionIds[currentIndex + 1]}`,
         up: isLastSection,
+        previousHref: currentIndex > 0 ? `#${sectionIds[currentIndex - 1]}` : null,
       }
-      setNavigation((current) => current.href === nextNavigation.href && current.up === nextNavigation.up
+      setNavigation((current) => current.href === nextNavigation.href
+        && current.up === nextNavigation.up
+        && current.previousHref === nextNavigation.previousHref
         ? current
         : nextNavigation)
     }
@@ -45,9 +52,11 @@ const SectionNavigation = () => {
   const buttonClass = 'grid h-12 w-12 place-items-center rounded-full border-2 border-brand bg-transparent text-brand transition-colors hover:bg-brand hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 sm:bottom-8 sm:right-12">
-      <a href="#top" aria-label="Back to top" className={buttonClass}>
-        <Icons.ChevronUp size={24} aria-hidden="true" />
-      </a>
+      {navigation.previousHref && (
+        <a href={navigation.previousHref} aria-label="Go to previous section" className={buttonClass}>
+          <Icons.ChevronUp size={24} aria-hidden="true" />
+        </a>
+      )}
       <a href={navigation.href} aria-label={navigation.up ? 'Back to top' : 'Go to next section'} className={buttonClass}>
         <NextArrow size={24} aria-hidden="true" />
       </a>
@@ -112,12 +121,13 @@ const Works = () => (
 const Social = () => (
   <Section id="social" className="!pt-5">
     <div className="grid items-center gap-10 lg:grid-cols-[1.6fr_1fr]">
-      <div className="space-y-12">{clients.map((c) => (
-        <article key={c.name} className="grid items-center gap-6 sm:grid-cols-[180px_1fr]">
-          <img src={c.img} alt={`${c.name} Instagram profile`} loading="lazy" className="h-72 w-full rounded-2xl border border-zinc-700 object-cover object-top sm:w-[180px]" />
-          <div><h3 className="font-display text-2xl uppercase">{c.name}</h3><div className="mt-2 h-0.5 w-12 bg-brand" />
-            <p className="mt-4 text-sm leading-relaxed text-zinc-300">{c.text}</p>
-            <ul className="mt-4 flex flex-wrap gap-2">{c.stats.map((s) => <li key={s} className="rounded-full border border-brand px-3 py-1 text-xs">{s}</li>)}</ul></div>
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
+        {clients.map((c) => (
+        <article key={c.name} className="text-center">
+          <a href={c.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${c.name} on Instagram`} className="group rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+            <img src={c.img} alt={`${c.name} Instagram profile`} loading="lazy" className="h-66 w-full rounded-2xl border border-zinc-700 object-cover object-top transition-opacity group-hover:border-brand" />
+            <h3 className="mt-3 font-display text-lg uppercase transition-colors group-hover:text-brand sm:text-xl">{c.name}</h3>
+          </a>
         </article>))}</div>
       <Title className="lg:border-l lg:border-zinc-600 lg:pl-10 lg:text-right !text-5xl sm:!text-6xl lg:!text-7xl">Social<br />Media<br />Management</Title>
     </div>

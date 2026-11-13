@@ -28,10 +28,12 @@ export const works = {
   categories: ['SOCIAL MEDIA MANAGEMENT', 'META PAID ADVERTISING', 'CONTENT CREATION & LOCAL SEO'],
 }
 export const clients = [
-  { name: 'Footzo Footwear Melattur', img: '/img/footzo.png', stats: ['166 posts', '6,157 followers', '236.3K views / 30 days'],
-    text: 'Premium ladies footwear, bags and fashion accessories in Melattur, Malappuram. Reels, restock banners and hiring posts drive enquiries through a WhatsApp link.' },
-  { name: 'Malabar Furniture Perinthalmanna', img: '/img/malabar.png', stats: ['67 posts', '6,000 followers', '399.3K views / 30 days'],
-    text: 'Premium home and office furniture in Perinthalmanna. Room-set visuals, highlights for dining and sofa ranges, and customer-delivery stories.' },
+  { name: 'Footzo Footwear', img: '/img/footzo.jpeg', url: 'https://www.instagram.com/_footzo_footwear/' },
+  { name: 'Malabar Furniture', img: '/img/malabar.jpeg', url: 'https://www.instagram.com/malabarfurnitureperinthalmanna/' },
+  { name: 'Ayami Boutique', img: '/img/ayami.jpeg', url: 'https://www.instagram.com/ayami_designer/' },
+  { name: 'Moonlights', img: '/img/moonlights.jpeg', url: 'https://www.instagram.com/moonlights_melattur/' },
+  { name: 'Newcarbon', img: '/img/newcarbon.jpeg', url: 'https://www.instagram.com/newcarbon_automotive/' },
+  { name: 'Ssorrisso', img: '/img/sorisso.jpeg', url: 'https://www.instagram.com/ssorisso_/' },
 ]
 export const ads = [
   { n: '12,800+', l: 'video ThruPlays at Rs 0.04 to Rs 0.05 each, across two Meta video campaigns' },
